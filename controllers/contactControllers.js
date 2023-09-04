@@ -1,8 +1,9 @@
+const asyncHandler = require("express-async-handler") //async handler will automatically catch whenever a exception is occured is going to pass to asynHandler
+const Contact = require("../models/contactModels")
+
 // desc Get all contacts
 // @route Get /api/contacts
 // @access public
-const asyncHandler = require("express-async-handler") //async handler will automatically catch whenever a exception is occured is going to pass to asynHandler
-const Contact = require("../models/contactModels")
 
 const getContacts = asyncHandler(async(req , res)=> {
     const contacts = await Contact.find()
