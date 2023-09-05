@@ -57,18 +57,20 @@ const loginUser = asyncHandler(async  (req,res) => {
                 username:user.username,
                 email:user.email,
                 id:user.id
-            }
-        })
+            },
+        },process.env.ACCESS_TOKEN_SECRET,{ expiresIn: "1m" });
+        res.status(200).json({ accessToken })
     }
-
-
-    res.json({message: "Login new users"})
+    else{
+        res.status(400)
+        throw new Error("email or password is not valid")
+    }
 })
 
 
 // desc Current user
 // @route POST /api/users/current
-// @access public
+// @access private
 
 const currentUser = asyncHandler(async  (req,res) => {
     res.json({message: "Current users"})
